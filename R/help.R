@@ -154,3 +154,57 @@ print.yhelp <- function(...) {
 ##' @md
 ##' @export
 ys_help <- ys_help_setup()
+
+
+#' Convert a data frame to a yspec yaml file
+#' @param x data frame to convert
+#' @param desc description parameter for the yspec file
+#' @param projectid projectid parameter for the yspec file
+#' @param varname column specifying variable names to include in the yspec file
+#' @param vardesc column specifying variable descriptions to include in the yspec file
+#' @param varunit column specifying variable units to include in the yspec file
+#' @param vartype column specifying variable types to include in the yspec file
+#' @param output name of the output yspec file
+#' 
+#' @author Omar I. Elashkar
+#' @export
+df_to_yspec <- function(x, desc = "", projectid = "", varname, vardesc = NULL, varunit = NULL, vartype = NULL, output = "yspec.yaml") {
+  stopifnot(is.data.frame(x))
+  stopifnot(all(c(varname, vardesc, varunit, vartype) %in% colnames(x)))
+  stopifnot(grepl("\\.yaml$", output))
+  
+  # Create the YAML structure
+  yspec_list <- list(
+    SETUP__ = list(
+      description = desc,
+      projectnumber = projectid
+    )
+  )
+  
+  # Add variables as top-level keys
+  for (i in seq_len(nrow(x))) {
+    variable <- list()
+    
+    # Define fields and their corresponding column names
+    fields <- list(
+      long = vardesc,
+      unit = varunit,
+      type = vartype
+    )
+    
+    # Dynamically add fields if they are not NA or "N/A"
+    for (field_name in names(fields)) {
+      field_value <- x[[fields[[field_name]]]][i]
+      if (!is.na(field_value) && field_value != "N/A") {
+        variable[[field_name]] <- field_value
+      }
+    }
+    
+    # Add the variable to the YAML structure
+    yspec_list[[x[[varname]][i]]] <- variable
+  }
+  
+  # Write to YAML file
+  yaml::write_yaml(yspec_list, output)
+  message("YAML file created: ", output)
+}
