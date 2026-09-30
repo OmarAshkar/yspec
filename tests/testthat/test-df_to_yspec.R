@@ -40,3 +40,45 @@ test_that("df_to_yspec creates a valid YAML file with top-level variables", {
   expect_equal(yaml_content$WEIGHT$unit, "kg")
   expect_equal(yaml_content$WEIGHT$type, "numeric")
 })
+
+
+test_that("df_to_yspec with non-existing cols", {
+  adam_df <- data.frame(
+    varname = c("AGE", "SEX", "WEIGHT"),
+    vardesc = c("Age of the subject", "Sex of the subject", "Weight of the subject"),
+    vartype = c("numeric", "character", "numeric"),
+    stringsAsFactors = FALSE
+  )
+
+  # Define output path
+  output_path <- tempfile(fileext = ".yaml")
+
+  df_to_yspec(
+    x = adam_df,
+    desc = "Another example PK type data set",
+    varname = "varname",
+    vardesc = "vardesc",
+    vartype = "vartype",
+    output = output_path
+  ) |> expect_no_error()
+
+  # Validate the YAML file
+  yaml_content <- ys_load(output_path)
+
+  # Validate SETUP__ section
+  expect_equal(get_meta(yaml_content)[[1]], "Another example PK type data set")
+
+  # Validate top-level variables
+  expect_equal(yaml_content$AGE$long, "Age of the subject")
+  expect_equal(yaml_content$AGE$type, "numeric")
+
+  expect_equal(yaml_content$SEX$long, "Sex of the subject")
+  expect_equal(yaml_content$SEX$type, "character")
+
+  expect_equal(yaml_content$WEIGHT$long, "Weight of the subject")
+  expect_equal(yaml_content$WEIGHT$type, "numeric")
+})
+
+
+
+

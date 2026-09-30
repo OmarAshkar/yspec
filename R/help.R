@@ -194,6 +194,7 @@ df_to_yspec <- function(x, desc = "", projectid = "", varname, vardesc = NULL, v
     
     # Dynamically add fields if they are not NA or "N/A"
     for (field_name in names(fields)) {
+      if (is.null(fields[[field_name]])) next
       field_value <- x[[fields[[field_name]]]][i]
       if (!is.na(field_value) && field_value != "N/A") {
         variable[[field_name]] <- field_value
