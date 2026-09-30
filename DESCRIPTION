@@ -51,7 +51,6 @@ Imports:
     stringr
 Suggests: pander, testthat
 VignetteBuilder: knitr
-RoxygenNote: 7.3.3
 Collate: 
     'utils.R'
     'Aaaa.R'
@@ -83,3 +82,4 @@ Collate:
     'x_table_2.R'
     'ys-get.R'
     'ys-tidy.R'
+Config/roxygen2/version: 8.1.0

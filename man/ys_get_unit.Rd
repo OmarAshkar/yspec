@@ -18,7 +18,7 @@ or more character}
 }
 \description{
 Forms unit for a column (\code{ycol} method) or columns (\code{yspec} method). Use
-\link[purrr:map]{purrr::map} or \link[purrr:map]{purrr::map_chr} to simply extract the unit field.
+\link[purrr:map]{purrr::map} or \link[purrr:map_chr]{purrr::map_chr} to simply extract the unit field.
 }
 \examples{
 spec <- ys_help$spec()

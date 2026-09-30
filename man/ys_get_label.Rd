@@ -13,7 +13,7 @@ ys_get_label(x, ...)
 }
 \description{
 Forms a label for a column (\code{ycol} method) or columns (\code{yspec} method). Use
-\link[purrr:map]{purrr::map} or \link[purrr:map]{purrr::map_chr} to simply extract the label field.
+\link[purrr:map]{purrr::map} or \link[purrr:map_chr]{purrr::map_chr} to simply extract the label field.
 }
 \examples{
 spec <- ys_help$spec()

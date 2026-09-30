@@ -79,6 +79,44 @@ test_that("df_to_yspec with non-existing cols", {
   expect_equal(yaml_content$WEIGHT$type, "numeric")
 })
 
+test_that("df_to_yspec converts codelist strings to YAML values", {
+  device_df <- data.frame(
+    varname = c("MATERIAL", "STATE", "SERIAL", "EMPTY"),
+    vartype = c("numeric", "numeric", "numeric", "numeric"),
+    varcodelist = c(
+      "10=Copper coil, 20=Glass panel, 30=Polymer casing, Unknown= -1",
+      "0 = Idle\n1=Calibration pending\n2=Signal outside range\n3=Battery replacement needed\n4=Ready for shipping",
+      NA_character_, ""
+    )
+  )
+  output_path <- tempfile(fileext = ".yaml")
+
+  df_to_yspec(device_df, varname = "varname", vartype = "vartype",
+              varcodelist = "varcodelist", output = output_path)
+
+  yaml_content <- ys_load(output_path)
+  expect_equal(yaml_content$MATERIAL$values[["Copper coil"]], 10L)
+  expect_equal(yaml_content$MATERIAL$values[["Polymer casing"]], 30L)
+  expect_equal(yaml_content$MATERIAL$values[["Unknown"]], -1L)
+  expect_equal(yaml_content$STATE$values[["Idle"]], 0L)
+  expect_equal(yaml_content$STATE$values[["Signal outside range"]], 2L)
+  expect_false("values" %in% names(yaml_content$SERIAL))
+  expect_false("values" %in% names(yaml_content$EMPTY))
+})
+
+test_that("df_to_yspec accepts a custom codelist parser", {
+  device_df <- data.frame(varname = "FINISH", varcodelist = "MATTE|GLOSS")
+  output_path <- tempfile(fileext = ".yaml")
+  parser <- function(text) {
+    stats::setNames(as.list(c(1L, 2L)), strsplit(text, "|", fixed = TRUE)[[1]])
+  }
+
+  df_to_yspec(device_df, varname = "varname", varcodelist = "varcodelist",
+              codelist_func = parser, output = output_path)
+
+  expect_equal(ys_load(output_path)$FINISH$values[["GLOSS"]], 2L)
+})
+
 
 
 

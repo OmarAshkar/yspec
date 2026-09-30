@@ -54,6 +54,7 @@ export(check_data)
 export(check_data_file)
 export(define_for_rmd)
 export(definetemplate)
+export(df_to_yspec)
 export(fda_content_table)
 export(fda_define)
 export(fda_table)
@@ -125,73 +126,93 @@ export(yspec_select_chr)
 export(yspec_select_discrete)
 export(yspec_yml_file)
 importFrom(assertthat,assert_that)
-importFrom(crayon,black)
-importFrom(crayon,blue)
-importFrom(crayon,bold)
-importFrom(crayon,green)
-importFrom(crayon,italic)
-importFrom(crayon,red)
-importFrom(dplyr,"%>%")
-importFrom(dplyr,.data)
-importFrom(dplyr,bind_rows)
-importFrom(dplyr,desc)
-importFrom(dplyr,filter)
-importFrom(dplyr,if_else)
-importFrom(dplyr,mutate)
-importFrom(dplyr,rowwise)
+importFrom(crayon,
+  black,
+  blue,
+  bold,
+  green,
+  italic,
+  red
+)
+importFrom(dplyr,
+  "%>%",
+  .data,
+  bind_rows,
+  desc,
+  filter,
+  if_else,
+  mutate,
+  rowwise
+)
 importFrom(fs,path_rel)
 importFrom(glue,glue)
 importFrom(knitr,kable)
-importFrom(purrr,compact)
-importFrom(purrr,discard)
-importFrom(purrr,flatten)
-importFrom(purrr,flatten_chr)
-importFrom(purrr,imap)
-importFrom(purrr,imap_chr)
-importFrom(purrr,imodify)
-importFrom(purrr,iwalk)
-importFrom(purrr,keep)
-importFrom(purrr,map)
-importFrom(purrr,map_chr)
-importFrom(purrr,map_df)
-importFrom(purrr,map_if)
-importFrom(purrr,map_int)
-importFrom(purrr,map_lgl)
-importFrom(purrr,modify)
-importFrom(purrr,transpose)
-importFrom(purrr,walk)
-importFrom(purrr,walk2)
-importFrom(rlang,abort)
-importFrom(rlang,as_string)
-importFrom(rlang,enquo)
-importFrom(rlang,expr)
-importFrom(rlang,exprs)
-importFrom(rlang,is_named)
-importFrom(rlang,quo_get_expr)
-importFrom(rlang,quos)
-importFrom(rlang,set_names)
-importFrom(rlang,warn)
-importFrom(rmarkdown,html_document)
-importFrom(rmarkdown,pdf_document)
-importFrom(rmarkdown,render)
+importFrom(purrr,
+  compact,
+  discard,
+  flatten,
+  flatten_chr,
+  imap,
+  imap_chr,
+  imodify,
+  iwalk,
+  keep,
+  map,
+  map_chr,
+  map_df,
+  map_if,
+  map_int,
+  map_lgl,
+  modify,
+  transpose,
+  walk,
+  walk2
+)
+importFrom(rlang,
+  abort,
+  as_string,
+  enquo,
+  expr,
+  exprs,
+  is_named,
+  quo_get_expr,
+  quos,
+  set_names,
+  warn
+)
+importFrom(rmarkdown,
+  html_document,
+  pdf_document,
+  render
+)
 importFrom(rstudioapi,insertText)
-importFrom(stringr,fixed)
-importFrom(stringr,str_count)
-importFrom(stringr,str_detect)
-importFrom(stringr,str_split_fixed)
-importFrom(tibble,as_tibble)
-importFrom(tibble,tibble)
-importFrom(tidyselect,all_of)
-importFrom(tidyselect,any_of)
-importFrom(tidyselect,eval_rename)
-importFrom(tidyselect,eval_select)
-importFrom(tidyselect,vars_select)
+importFrom(stringr,
+  fixed,
+  str_count,
+  str_detect,
+  str_split_fixed
+)
+importFrom(tibble,
+  as_tibble,
+  tibble
+)
+importFrom(tidyselect,
+  all_of,
+  any_of,
+  eval_rename,
+  eval_select,
+  vars_select
+)
 importFrom(tools,toTitleCase)
-importFrom(utils,capture.output)
-importFrom(utils,head)
-importFrom(utils,read.csv)
-importFrom(utils,tail)
-importFrom(utils,type.convert)
+importFrom(utils,
+  capture.output,
+  head,
+  read.csv,
+  tail,
+  type.convert
+)
 importFrom(xtable,xtable)
-importFrom(yaml,as.yaml)
-importFrom(yaml,yaml.load_file)
+importFrom(yaml,
+  as.yaml,
+  yaml.load_file
+)
